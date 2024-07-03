@@ -1,6 +1,6 @@
 export default function PageDescription() {
   return (
-    <div className="mx-auto mt-16 flex w-3/4 flex-col items-center justify-center gap-4 text-center">
+    <div className="container-margin mx-auto flex w-3/4 flex-col items-center justify-center gap-4 text-center">
       <h3>Here&apos;s what we have in store</h3>
       <p>
         This list is regularly updated as our vendors introduce new posts,

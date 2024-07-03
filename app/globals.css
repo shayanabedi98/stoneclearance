@@ -14,18 +14,26 @@ body {
   @apply bg-bg text-primary;
 }
 
+.container-margin {
+  @apply mt-16;
+}
+
 .btn {
   @apply rounded-md bg-secondary p-2 text-bg;
 }
 
 h1 {
-  @apply text-4xl font-semibold;
+  @apply text-5xl font-bold;
 }
 
 h2 {
-  @apply text-2xl;
+  @apply text-3xl;
 }
 
 h3 {
-  @apply text-xl font-semibold;
+  @apply text-2xl font-semibold;
+}
+
+.inventory-title-span {
+  @apply font-bold;
 }

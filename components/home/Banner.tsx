@@ -5,13 +5,13 @@ export default function Banner() {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <Image
-        className="h-[650px] max-w-screen-2xl rounded-md object-cover"
+        className="h-[650px] max-w-screen-2xl rounded-md object-cover object-right-bottom"
         src={banner}
         alt=""
       />
-      <div className="font bg-opacity-90 absolute flex flex-col items-center justify-center gap-4 rounded-md bg-bg px-8 py-10">
+      <div className="font absolute flex flex-col items-center justify-center gap-4 rounded-md border-2 bg-primary bg-opacity-50 px-10 py-12 text-bg">
         <h1>Welcome to Stone Clearance</h1>
-        <h2>The GTA&apos;s Clearance Section for Stones</h2>
+        <h2>The GTA&apos;s Stones Clearance Section</h2>
       </div>
     </div>
   );
