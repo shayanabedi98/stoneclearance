@@ -12,6 +12,12 @@ const authOptions: AuthOptions = {
     signIn: "/sign-in",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Redirect to home page after sign-in
+      return baseUrl;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
