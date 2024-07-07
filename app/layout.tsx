@@ -23,7 +23,7 @@ export default function RootLayout({
         <div className="relative mx-auto min-h-screen max-w-screen-2xl">
           <NextAuthProvider>
             <Navbar />
-            {children}
+            <div className="min-h-[780px]">{children}</div>
             <Footer />
           </NextAuthProvider>
         </div>

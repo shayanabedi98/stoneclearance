@@ -1,13 +1,23 @@
 import SignInButtons from "@/components/sign-in/SignInButtons";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-export default function SignIn() {
+export default async function SignIn() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="flex min-h-[650px] flex-col justify-center text-secondary">
       <div className="flex flex-col items-center justify-center gap-6">
         <h1>Hello, Vendor!</h1>
         <h3 className="w-3/4 text-center">
           Before you can start making your own posts, you must sign in with a
-          Google account. If this is your first time, you&apos;ll proceed to completing a qualification form.
+          Google account. If this is your first time, you&apos;ll proceed to
+          completing a qualification form.
         </h3>
         <p className="w-3/4 text-center">
           After logging in with Google, you will be asked to complete a form,
