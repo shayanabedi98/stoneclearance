@@ -7,6 +7,10 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
+type User = {
+  id: string
+}
+
 export default function Navbar() {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const popupRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +61,7 @@ export default function Navbar() {
                   <span className="text-sm">{session.user?.email}</span>
                   <Link
                     className="font-bold hover:underline"
-                    href={"/dashboard"}
+                    href={`/dashboard/${(session.user as User).id}`}
                   >
                     Dashboard
                   </Link>
