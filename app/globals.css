@@ -34,6 +34,14 @@ h3 {
   @apply text-2xl font-semibold;
 }
 
+label {
+  @apply font-semibold;
+}
+
 .inventory-title-span {
   @apply font-bold;
+}
+
+.userinfo {
+  @apply w-96 mb-3 border-2 px-1 rounded-md;
 }

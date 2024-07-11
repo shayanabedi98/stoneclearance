@@ -29,5 +29,15 @@ export default async function UserInformation() {
     redirect(`/dashboard/${(session.user as User).id}`);
   }
 
-  return <UserInformationForm />;
+  return (
+    <div className="flex flex-col items-center">
+      <UserInformationForm
+        nameState=""
+        companyNameState=""
+        telState=""
+        contactEmailState=""
+        selectedCityState=""
+      />
+    </div>
+  );
 }

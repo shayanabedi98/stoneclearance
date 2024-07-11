@@ -8,6 +8,14 @@ type User = {
   id: string;
 };
 
+type Props = {
+  nameState: string;
+  selectedCityState: string;
+  contactEmailState: string;
+  companyNameState: string;
+  telState: string;
+};
+
 const cities = [
   "Richmond Hill",
   "Vaughan",
@@ -22,12 +30,18 @@ const cities = [
   "Oshawa",
 ];
 
-export default function UserInformationForm() {
-  const [name, setName] = useState("");
-  const [selectedCity, setSelectedCity] = useState("Select City");
-  const [contactEmail, setContactEmail] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [tel, setTel] = useState("");
+export default function UserInformationForm({
+  nameState,
+  selectedCityState,
+  contactEmailState,
+  companyNameState,
+  telState,
+}: Props) {
+  const [name, setName] = useState(nameState);
+  const [selectedCity, setSelectedCity] = useState(selectedCityState);
+  const [contactEmail, setContactEmail] = useState(contactEmailState);
+  const [companyName, setCompanyName] = useState(companyNameState);
+  const [tel, setTel] = useState(telState);
 
   const router = useRouter();
   const { data: session } = useSession();
@@ -69,9 +83,10 @@ export default function UserInformationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4" action="">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-1" action="">
       <label htmlFor="name">Name</label>
       <input
+        className="userinfo"
         onChange={(e) => setName(e.target.value)}
         type="text"
         required
@@ -80,6 +95,7 @@ export default function UserInformationForm() {
       />
       <label htmlFor="companyName">Company Name</label>
       <input
+        className="userinfo"
         onChange={(e) => setCompanyName(e.target.value)}
         type="text"
         required
@@ -88,6 +104,7 @@ export default function UserInformationForm() {
       />
       <label htmlFor="contactEmail">Contact Email</label>
       <input
+        className="userinfo"
         onChange={(e) => setContactEmail(e.target.value)}
         type="text"
         required
@@ -96,11 +113,12 @@ export default function UserInformationForm() {
       />
       <label htmlFor="city">City</label>
       <select
+        className="userinfo"
         required
         name="city"
         onChange={(e) => setSelectedCity(e.target.value)}
       >
-        <option value="Select City">-Select City-</option>
+        <option value={""}>-Select City-</option>
         {cities.map((city, index) => (
           <option key={index} value={city}>
             {city}
@@ -109,13 +127,16 @@ export default function UserInformationForm() {
       </select>
       <label htmlFor="tel">Phone Number</label>
       <input
+        className="userinfo"
         onChange={(e) => setTel(e.target.value)}
         type="tel"
         required
         name="tel"
         value={tel}
       />
-      <button type="submit">Submit</button>
+      <button className="btn w-52" type="submit">
+        Submit
+      </button>
     </form>
   );
 }

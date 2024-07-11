@@ -19,6 +19,16 @@ export default async function Dashboard({
     where: { id },
   });
 
+  if (
+    !user?.name ||
+    !user?.companyName ||
+    !user?.tel ||
+    !user?.contactEmail ||
+    !user?.city
+  ) {
+    redirect("/user-information");
+  }
+
   return (
     <div>
       <h1>Hello, {user?.companyName}</h1>
