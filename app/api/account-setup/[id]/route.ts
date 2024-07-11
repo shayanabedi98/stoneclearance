@@ -5,7 +5,13 @@ export async function PUT(
   req: Request,
   { params }: { params: { id: string } },
 ) {
-  const { name, companyName, tel, city, contactEmail } = await req.json();
+  const {
+    name,
+    companyName,
+    tel,
+    selectedCity: city,
+    contactEmail,
+  } = await req.json();
   const { id } = params;
 
   try {

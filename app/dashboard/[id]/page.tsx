@@ -19,5 +19,12 @@ export default async function Dashboard({
     where: { id },
   });
 
-  return <h1>Hello, {user?.companyName}</h1>;
+  return (
+    <div>
+      <h1>Hello, {user?.companyName}</h1>
+      <h2>your name is {user?.name}</h2>
+      <h2>your company is in {user?.city}</h2>
+      <h2>you phone number is {user?.tel}</h2>
+    </div>
+  );
 }

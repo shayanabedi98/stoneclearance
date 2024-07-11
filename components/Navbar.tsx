@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 type User = {
-  id: string
-}
+  id: string;
+};
 
 export default function Navbar() {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
@@ -70,6 +70,12 @@ export default function Navbar() {
                     href={"/create-post"}
                   >
                     Create Post
+                  </Link>
+                  <Link
+                    className="font-bold hover:underline"
+                    href={"/user-settings"}
+                  >
+                    Settings
                   </Link>
                   <button
                     className="w-full bg-secondary p-2 font-bold text-bg"

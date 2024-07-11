@@ -3,15 +3,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
-type User = {
-  id: string;
-};
-
 export default async function SignIn() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect(`/dashboard/${(session.user as User).id}`);
+    redirect('/user-information')
   }
 
   return (
