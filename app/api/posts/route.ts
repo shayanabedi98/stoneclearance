@@ -11,8 +11,9 @@ export async function POST(req: Request) {
     width,
     thickness,
     price,
+    quantity,
+    authorEmail,
   } = await req.json();
-  const authorEmail = "abedishayan@gmail.com";
 
   if (
     !title ||
@@ -23,7 +24,8 @@ export async function POST(req: Request) {
     !width ||
     !thickness ||
     !price ||
-    !authorEmail
+    !authorEmail ||
+    !quantity
   ) {
     return NextResponse.json({ message: "Missing fields" }, { status: 500 });
   }
@@ -40,6 +42,7 @@ export async function POST(req: Request) {
         thickness,
         price,
         authorEmail,
+        quantity,
       },
     });
     console.log(newPost);
@@ -54,7 +57,14 @@ export async function GET(req: Request) {
   try {
     const posts = await prisma.post.findMany({
       include: {
-        author: true,
+        author: {
+          select: {
+            city: true,
+            companyName: true,
+            tel: true,
+            contactEmail: true,
+          },
+        },
       },
     });
     return NextResponse.json(posts);

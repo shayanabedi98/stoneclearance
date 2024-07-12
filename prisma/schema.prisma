@@ -15,13 +15,13 @@ model User {
   tel           String?
   contactEmail  String?
   city          String?
-  companyName   String?    @unique
+  companyName   String?   @unique
   image         String?
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Account {
@@ -68,7 +68,7 @@ model VerificationToken {
 
 model Post {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title        String
+  title       String
   imageUrl    String
   type        String
   description String
@@ -76,6 +76,7 @@ model Post {
   width       String
   thickness   String
   price       String[]
+  quantity    String[]
   author      User     @relation(fields: [authorEmail], references: [email])
   authorEmail String
 }
