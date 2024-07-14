@@ -32,6 +32,7 @@ export async function PUT(
     thickness,
     type,
     imageUrl,
+    quantity,
   } = await req.json();
   const { id } = params;
   try {
@@ -42,6 +43,9 @@ export async function PUT(
         description,
         price: {
           push: price,
+        },
+        quantity: {
+          push: quantity,
         },
         height,
         width,

@@ -3,45 +3,44 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-
-type User = {
-  id: string;
-};
+import { User } from "@/types/general";
 
 type Props = {
-  titleState: string;
-  typeState: string;
-  descriptionState: string;
-  imageUrlState: string;
-  heightState: string;
-  widthState: string;
-  thicknessState: string;
-  priceState: string;
-  quantityState: string;
+  _title: string;
+  _type: string;
+  _description: string;
+  _imageUrl: string;
+  _height: string;
+  _width: string;
+  _thickness: string;
+  _price: string;
+  _quanitity: string;
+  postId: string;
 };
 
-export default function PostForm({
-  titleState,
-  typeState,
-  descriptionState,
-  imageUrlState,
-  heightState,
-  widthState,
-  thicknessState,
-  priceState,
-  quantityState,
+export default function CreatePostForm({
+  _title,
+  _type,
+  _description,
+  _imageUrl,
+  _height,
+  _width,
+  _thickness,
+  _price,
+  _quanitity,
+  postId
 }: Props) {
   const path = usePathname();
 
-  const [title, setTitle] = useState(titleState);
-  const [type, setType] = useState(typeState);
-  const [description, setDescription] = useState(descriptionState);
-  const [imageUrl, setImageUrl] = useState(imageUrlState);
-  const [height, setHeight] = useState(heightState);
-  const [width, setWidth] = useState(widthState);
-  const [thickness, setThickness] = useState(thicknessState);
-  const [price, setPrice] = useState(priceState);
-  const [quantity, setQuantity] = useState(quantityState);
+  const [title, setTitle] = useState(_title);
+  const [type, setType] = useState(_type);
+  const [description, setDescription] = useState(_description);
+  const [imageUrl, setImageUrl] = useState(_imageUrl);
+  const [height, setHeight] = useState(_height);
+  const [width, setWidth] = useState(_width);
+  const [thickness, setThickness] = useState(_thickness);
+  const [price, setPrice] = useState(_price);
+  const [quantity, setQuantity] = useState(_quanitity);
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -75,8 +74,8 @@ export default function PostForm({
     }
 
     try {
-      const res = await fetch("/api/posts", {
-        method: "POST",
+      const res = await fetch(`/api/posts/${postId}`, {
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
@@ -88,8 +87,8 @@ export default function PostForm({
           height,
           width,
           thickness,
-          price: [price],
-          quantity: [quantity],
+          price,
+          quantity,
           authorEmail,
         }),
       });

@@ -116,6 +116,7 @@ export default function UserInformationForm({
         className="userinfo"
         required
         name="city"
+        value={selectedCity}
         onChange={(e) => setSelectedCity(e.target.value)}
       >
         <option value={""}>-Select City-</option>
