@@ -11,13 +11,14 @@ export async function PUT(
     tel,
     selectedCity: city,
     contactEmail,
+    isActive,
   } = await req.json();
   const { id } = params;
 
   try {
     const post = await prisma.user.update({
       where: { id },
-      data: { name, companyName, tel, city, contactEmail },
+      data: { name, companyName, tel, city, contactEmail, isActive },
     });
     return NextResponse.json(post);
   } catch (error) {

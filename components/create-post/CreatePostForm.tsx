@@ -15,7 +15,8 @@ export default function CreatePostForm() {
   const [height, setHeight] = useState("");
   const [width, setWidth] = useState("");
   const [thickness, setThickness] = useState("");
-  const [price, setPrice] = useState("");
+  const [originalPrice, setOriginalPrice] = useState("");
+  const [discountedPrice, setDiscountedPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const { data: session } = useSession();
   const router = useRouter();
@@ -42,7 +43,7 @@ export default function CreatePostForm() {
       !height ||
       !width ||
       !thickness ||
-      !price ||
+      !originalPrice ||
       !quantity
     ) {
       alert("Must complete all fields to create post.");
@@ -63,9 +64,11 @@ export default function CreatePostForm() {
           height,
           width,
           thickness,
-          price: [price],
-          quantity: [quantity],
+          originalPrice,
+          discountedPrice,
+          quantity,
           authorEmail,
+          visible: true,
         }),
       });
 
@@ -151,20 +154,29 @@ export default function CreatePostForm() {
         min={1}
         max={20}
       />
-      <label htmlFor="price">
-        {path == "/create-post" ? "Price ($CAD)" : "New Price"}
-      </label>
+      <label htmlFor="originalPrice">Original Price</label>
       <input
         required
-        onChange={(e) => setPrice(e.target.value)}
-        value={price}
+        onChange={(e) => setOriginalPrice(e.target.value)}
+        value={originalPrice}
         type="number"
-        name="price"
+        name="originalPrice"
+        step={0.01}
+        max={10000}
+        min={discountedPrice ? discountedPrice : 1}
+      />
+      <label htmlFor="discountedPrice">Discounted Price</label>
+      <input
+        onChange={(e) => setDiscountedPrice(e.target.value)}
+        value={discountedPrice}
+        type="number"
+        name="discountedPrice"
         step={0.01}
         min={1}
+        max={originalPrice ? originalPrice : 10000}
       />
 
-      <label htmlFor="price">
+      <label htmlFor="quantity">
         {path == "/create-post" ? "Quanitity" : "New Quantity"}
       </label>
       <input

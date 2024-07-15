@@ -26,13 +26,15 @@ export async function PUT(
   const {
     title,
     description,
-    price,
+    originalPrice,
+    discountedPrice,
     height,
     width,
     thickness,
     type,
     imageUrl,
     quantity,
+    visible,
   } = await req.json();
   const { id } = params;
   try {
@@ -41,17 +43,15 @@ export async function PUT(
       data: {
         title,
         description,
-        price: {
-          push: price,
-        },
-        quantity: {
-          push: quantity,
-        },
+        originalPrice,
+        discountedPrice,
+        quantity,
         height,
         width,
         thickness,
         type,
         imageUrl,
+        visible,
       },
     });
     return NextResponse.json(post);

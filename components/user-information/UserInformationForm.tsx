@@ -56,29 +56,32 @@ export default function UserInformationForm({
       return;
     }
 
-    try {
-      const res = await fetch(
-        `/api/account-setup/${(session?.user as User).id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-type": "application/json",
+    if (name && selectedCity && contactEmail && tel && companyName) {
+      try {
+        const res = await fetch(
+          `/api/account-setup/${(session?.user as User).id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              selectedCity,
+              contactEmail,
+              companyName,
+              tel,
+              isActive: true,
+            }),
           },
-          body: JSON.stringify({
-            name,
-            selectedCity,
-            contactEmail,
-            companyName,
-            tel,
-          }),
-        },
-      );
-      if (res.ok) {
-        router.push(`/dashboard/${(session?.user as User).id}`);
+        );
+        if (res.ok) {
+          router.push(`/dashboard/${(session?.user as User).id}`);
+        }
+      } catch (error) {
+        console.log(error);
+        alert("Something went wrong, try again later or contact us.");
       }
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong, try again later or contact us.");
     }
   };
 

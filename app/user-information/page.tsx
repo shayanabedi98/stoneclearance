@@ -3,10 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/prismadb";
-
-type User = {
-  id: string;
-};
+import { User } from "@/types/general";
 
 export default async function UserInformation() {
   const session = await getServerSession(authOptions);

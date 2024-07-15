@@ -13,7 +13,8 @@ type Props = {
   _height: string;
   _width: string;
   _thickness: string;
-  _price: string;
+  _originalPrice: string;
+  _discountedPrice: string;
   _quanitity: string;
   postId: string;
 };
@@ -26,9 +27,10 @@ export default function CreatePostForm({
   _height,
   _width,
   _thickness,
-  _price,
+  _originalPrice,
+  _discountedPrice,
   _quanitity,
-  postId
+  postId,
 }: Props) {
   const path = usePathname();
 
@@ -39,7 +41,8 @@ export default function CreatePostForm({
   const [height, setHeight] = useState(_height);
   const [width, setWidth] = useState(_width);
   const [thickness, setThickness] = useState(_thickness);
-  const [price, setPrice] = useState(_price);
+  const [originalPrice, setOriginalPrice] = useState(_originalPrice);
+  const [discountedPrice, setDiscountedPrice] = useState(_discountedPrice);
   const [quantity, setQuantity] = useState(_quanitity);
   const { data: session } = useSession();
   const router = useRouter();
@@ -66,7 +69,7 @@ export default function CreatePostForm({
       !height ||
       !width ||
       !thickness ||
-      !price ||
+      !originalPrice ||
       !quantity
     ) {
       alert("Must complete all fields to create post.");
@@ -87,9 +90,11 @@ export default function CreatePostForm({
           height,
           width,
           thickness,
-          price,
+          originalPrice,
+          discountedPrice,
           quantity,
           authorEmail,
+          visible: true,
         }),
       });
 
@@ -175,19 +180,27 @@ export default function CreatePostForm({
         min={1}
         max={20}
       />
-      <label htmlFor="price">
-        {path == "/create-post" ? "Price ($CAD)" : "New Price"}
-      </label>
+      <label htmlFor="originalPrice">Original Price</label>
       <input
         required
-        onChange={(e) => setPrice(e.target.value)}
-        value={price}
+        onChange={(e) => setOriginalPrice(e.target.value)}
+        value={originalPrice}
         type="number"
-        name="price"
+        name="originalPrice"
+        step={0.01}
+        max={10000}
+        min={discountedPrice ? discountedPrice : 1}
+      />
+      <label htmlFor="discountedPrice">Discounted Price</label>
+      <input
+        onChange={(e) => setDiscountedPrice(e.target.value)}
+        value={discountedPrice}
+        type="number"
+        name="discountedPrice"
         step={0.01}
         min={1}
+        max={originalPrice ? originalPrice : 10000}
       />
-
       <label htmlFor="price">
         {path == "/create-post" ? "Quanitity" : "New Quantity"}
       </label>

@@ -10,9 +10,11 @@ export async function POST(req: Request) {
     height,
     width,
     thickness,
-    price,
+    originalPrice,
+    discountedPrice,
     quantity,
     authorEmail,
+    visible
   } = await req.json();
 
   if (
@@ -23,7 +25,7 @@ export async function POST(req: Request) {
     !height ||
     !width ||
     !thickness ||
-    !price ||
+    !originalPrice ||
     !authorEmail ||
     !quantity
   ) {
@@ -40,9 +42,11 @@ export async function POST(req: Request) {
         height,
         width,
         thickness,
-        price,
+        originalPrice,
+        discountedPrice,
         authorEmail,
         quantity,
+        visible,
       },
     });
     console.log(newPost);

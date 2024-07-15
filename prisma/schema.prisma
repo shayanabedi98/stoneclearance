@@ -22,6 +22,7 @@ model User {
   posts         Post[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  isActive      Boolean?
 }
 
 model Account {
@@ -67,16 +68,18 @@ model VerificationToken {
 }
 
 model Post {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  imageUrl    String
-  type        String
-  description String
-  height      String
-  width       String
-  thickness   String
-  price       String[]
-  quantity    String[]
-  author      User     @relation(fields: [authorEmail], references: [email])
-  authorEmail String
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  imageUrl        String
+  type            String
+  description     String
+  height          String
+  width           String
+  thickness       String
+  originalPrice   String
+  discountedPrice String?
+  visible         Boolean
+  quantity        String
+  author          User    @relation(fields: [authorEmail], references: [email])
+  authorEmail     String
 }

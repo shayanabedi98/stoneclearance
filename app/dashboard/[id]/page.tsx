@@ -35,6 +35,7 @@ export default async function Dashboard({
       <h2>your name is {user?.name}</h2>
       <h2>your company is in {user?.city}</h2>
       <h2>you phone number is {user?.tel}</h2>
+      <h2>User is {user.isActive ? "true" : "not-true"}</h2>
     </div>
   );
 }

@@ -32,8 +32,9 @@ export default async function UpdatePost({
           _description={post.description}
           _type={post.type}
           _height={post.height}
-          _price={post.price[post.price.length - 1]}
-          _quanitity={post.quantity[post.quantity.length - 1]}
+          _originalPrice={post.originalPrice}
+          _discountedPrice={post.discountedPrice ? post.discountedPrice : ""}
+          _quanitity={post.quantity}
           _thickness={post.thickness}
           _width={post.width}
           postId={post.id}
