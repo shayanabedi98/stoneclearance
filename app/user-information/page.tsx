@@ -15,12 +15,17 @@ export default async function UserInformation() {
   const user = await prisma.user.findUnique({
     where: { email: session.user?.email as string },
     select: {
+      isActive: true,
       city: true,
       contactEmail: true,
       tel: true,
       companyName: true,
     },
   });
+
+  if (!user?.isActive) {
+    redirect("/account-deactivated");
+  }
 
   if (user && user.city && user.contactEmail && user.tel && user.companyName) {
     redirect(`/dashboard/${(session.user as User).id}`);

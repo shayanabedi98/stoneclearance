@@ -19,6 +19,10 @@ export default async function Dashboard({
     where: { id },
   });
 
+  if (!user?.isActive) {
+    redirect("/account-deactivated");
+  }
+  
   if (
     !user?.name ||
     !user?.companyName ||

@@ -22,6 +22,15 @@ export default async function UpdatePost({
   if (!session) {
     redirect("/sign-in");
   }
+  
+  const user = await prisma.user.findUnique({
+    where: { email: session.user?.email as string },
+  });
+
+  if (!user?.isActive) {
+    redirect("/account-deactivated");
+  }
+
 
   return (
     <div className="flex flex-col items-center">

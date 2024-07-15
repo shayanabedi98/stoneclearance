@@ -13,6 +13,7 @@ export default async function UserSettings() {
   const userInfo = await prisma.user.findUnique({
     where: { email: session.user?.email as string },
     select: {
+      isActive: true,
       name: true,
       tel: true,
       companyName: true,
@@ -20,6 +21,9 @@ export default async function UserSettings() {
       city: true,
     },
   });
+  if (!userInfo?.isActive) {
+    redirect("/account-deactivated");
+  }
 
   if (
     !userInfo?.name ||
@@ -30,7 +34,7 @@ export default async function UserSettings() {
   ) {
     redirect("/user-information");
   }
-  
+
   return (
     <div className="flex flex-col items-center">
       <h1>User Settings</h1>
